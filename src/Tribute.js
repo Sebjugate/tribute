@@ -192,6 +192,11 @@ class Tribute {
             element.tributeMenu = this.menu
             this.menuEvents.bind(this.menu)
         }
+        
+        // re-add menu to DOM if it has been removed (by detach(), for example)
+        if (!document.body.contains(this.menu)) {
+            this.range.getDocument().body.appendChild(this.menu);
+        }
 
         this.isActive = true
         this.menuSelected = 0
