@@ -172,11 +172,7 @@ class Tribute {
         wrapper.className = 'tribute-container'
         wrapper.appendChild(ul)
 
-        if (this.menuContainer) {
-            return this.menuContainer.appendChild(wrapper)
-        }
-
-        return this.range.getDocument().body.appendChild(wrapper)
+        return wrapper;
     }
 
     showMenuFor(element, scrollTo) {
@@ -190,6 +186,12 @@ class Tribute {
         if (!this.menu) {
             this.menu = this.createMenu()
             element.tributeMenu = this.menu
+        }
+        
+        // add menu to DOM
+        var container = this.menuContainer ? this.menuContainer : this.range.getDocument().body;
+        if (!container.contains(this.menu)) {
+            container.appendChild(this.menu);
             this.menuEvents.bind(this.menu)
         }
 
